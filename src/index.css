@@ -3,11 +3,12 @@
     --text-color: #e0e0e0;
     --btn-text-color: #e0e0e0;
     --btn-bg-color: #393b3f;
+    --card-bg-color: #343a46;
 
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
     font-weight: 400;
-
+    font-size: 16px;
 
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
@@ -18,6 +19,12 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+@media (max-width: 600px) {
+    :root {
+        font-size: 12px;
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -35,12 +42,14 @@ body {
 }
 
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
     :root {
         --main-bg-color: #e0e0e0;
         --text-color: #23272f;
         --btn-text-color: #16444f;
         --btn-bg-color: #57c4dc;
+        --card-bg-color: #ebedf0;
+
     }
 }
 
@@ -51,5 +60,7 @@ body {
         --text-color: #e0e0e0;
         --btn-text-color: #e0e0e0;
         --btn-bg-color: #393b3f;
+        --card-bg-color: #343a46
+
     }
 }
