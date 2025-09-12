@@ -1,6 +1,8 @@
 :root {
     --main-bg-color: #23272f;
     --text-color: #e0e0e0;
+    --btn-text-color: #e0e0e0;
+    --btn-bg-color: #393b3f;
 
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
     line-height: 1.5;
@@ -37,6 +39,8 @@ body {
     :root {
         --main-bg-color: #e0e0e0;
         --text-color: #23272f;
+        --btn-text-color: #16444f;
+        --btn-bg-color: #57c4dc;
     }
 }
 
@@ -45,5 +49,7 @@ body {
     :root {
         --main-bg-color: #23272f;
         --text-color: #e0e0e0;
+        --btn-text-color: #e0e0e0;
+        --btn-bg-color: #393b3f;
     }
 }
