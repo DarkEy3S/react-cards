@@ -1,27 +1,17 @@
-import { useState } from "react";
-
-import "./App.css";
-import { Button } from "./components/Button/Button.tsx";
-import { Counter } from "./Counter.tsx";
-import { List } from "./List.tsx";
+import { MainLayout } from "./components/MainLayout";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <h1>React cool</h1>
-      <hr />
-
-      <div className="card">
-        <Button onClick={() => setCount((count) => count + 1)}>Count is {count}</Button>
-      </div>
-      <Counter />
-
-      <hr />
-
-      <List />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<div>Home</div>} />
+          <Route path="/forbidden" element={<div>forbidden!!!</div>} />
+          <Route path="/addquestion" element={<div>add question</div>} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
