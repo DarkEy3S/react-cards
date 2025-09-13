@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import type { ChangeEvent } from "react";
 import { QuestionCardList } from "../../components/QuestionCardList";
 import { API_URL } from "../../constants";
 import { Loader } from "../../components/Loader";
@@ -18,6 +19,9 @@ export interface ICards {
 
 export const HomePage = () => {
   const [questions, setQuestions] = useState<ICards[]>([]);
+
+  const [searchValue, setSearchValue] = useState("");
+
   const [getQuestions, isLoading, error] = useFetch<string>(async (url) => {
     const response = await fetch(`${API_URL}/${url}`);
     const questions: ICards[] = await response.json();
@@ -31,8 +35,14 @@ export const HomePage = () => {
     getQuestions("react");
   }, []);
 
+  const setSearchValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+    setSearchValue(e.target.value);
+  };
   return (
     <>
+      <input type="text" value={searchValue} onChange={setSearchValueHandler} />
+
       {error && <p className="error">{error}</p>}
       {isLoading && <Loader />}
       <QuestionCardList cards={questions} />
