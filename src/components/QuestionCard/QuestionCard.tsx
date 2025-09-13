@@ -1,10 +1,9 @@
-import {} from "react";
 import cls from "./QuestionCard.module.css";
 import { Button } from "../Button";
-import type { ICards } from "../../pages/HomePage/HomePage.tsx";
 import { useNavigate } from "react-router-dom";
+import type { ICards } from "../../pages/HomePage";
 
-interface QuestionCardProps {
+export interface QuestionCardProps {
   card: ICards;
 }
 

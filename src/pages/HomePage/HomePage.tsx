@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-// import cls from "./HomePage.module.css";
-import { QuestionCard } from "../../components/QuestionCard";
+import { QuestionCardList } from "../../components/QuestionCardList";
 import { API_URL } from "../../constants";
+
 export interface ICards {
   id: string;
   question: string;
@@ -14,12 +14,12 @@ export interface ICards {
 }
 
 export const HomePage = () => {
-  const [questions, setQuestions] = useState([]);
+  const [questions, setQuestions] = useState<ICards[]>([]);
 
   const getQuestions = async () => {
     try {
       const response = await fetch(`${API_URL}/react`);
-      const questions = await response.json();
+      const questions: ICards[] = await response.json();
       setQuestions(questions);
       console.log(questions);
     } catch (error) {
@@ -33,11 +33,7 @@ export const HomePage = () => {
 
   return (
     <>
-      {questions.map((card: ICards, index: number) => {
-        return <QuestionCard card={card} key={index} />;
-      })}
-
-      {/*<button onClick={getQuestions}>get questions</button>*/}
+      <QuestionCardList cards={questions} />
     </>
   );
 };
