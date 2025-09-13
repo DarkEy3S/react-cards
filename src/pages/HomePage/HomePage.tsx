@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { QuestionCardList } from "../../components/QuestionCardList";
 import { API_URL } from "../../constants";
+import { Loader } from "../../components/Loader";
 
 export interface ICards {
   id: string;
@@ -33,6 +34,7 @@ export const HomePage = () => {
 
   return (
     <>
+      <Loader />
       <QuestionCardList cards={questions} />
     </>
   );
