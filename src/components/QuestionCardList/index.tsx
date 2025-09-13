@@ -1,2 +1,2 @@
 export { QuestionCardList } from "./QuestionCardList";
-export type { QuestionCardProps } from "./QuestionCardList";
+export type { QuestionCardListProps } from "./QuestionCardList";
