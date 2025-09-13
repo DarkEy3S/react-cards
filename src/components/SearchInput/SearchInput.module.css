@@ -1,0 +1,25 @@
+.inputContainer {
+    width: 100%;
+    height: 40px;
+    border-radius: 20px;
+    background: var(--card-bg-color);
+    position: relative;
+}
+
+.searchIcon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+}
+
+.input {
+    width: 100%;
+    height: 100%;
+    padding: .5em .5em .5em 2.5em;
+    outline: none;
+    background: transparent;
+    border: none;
+    font-size: 1em;
+    color: var(--text-color);
+}

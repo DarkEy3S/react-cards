@@ -3,8 +3,9 @@ import type { ChangeEvent } from "react";
 import { QuestionCardList } from "../../components/QuestionCardList";
 import { API_URL } from "../../constants";
 import { Loader } from "../../components/Loader";
-
+import cls from "./HomePage.module.css";
 import { useFetch } from "../../hooks/useFetch.ts";
+import { SearchInput } from "../../components/SearchInput";
 
 export interface ICards {
   id: string;
@@ -19,7 +20,6 @@ export interface ICards {
 
 export const HomePage = () => {
   const [questions, setQuestions] = useState<ICards[]>([]);
-
   const [searchValue, setSearchValue] = useState("");
 
   const [getQuestions, isLoading, error] = useFetch<string>(async (url) => {
@@ -31,17 +31,19 @@ export const HomePage = () => {
     return questions;
   });
 
+  const onSerachChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+
   useEffect(() => {
     getQuestions("react");
   }, []);
 
-  const setSearchValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
-    setSearchValue(e.target.value);
-  };
   return (
     <>
-      <input type="text" value={searchValue} onChange={setSearchValueHandler} />
+      <div className={cls.controlsContainer}>
+        <SearchInput placeholder="search..." value={searchValue} onChange={onSerachChangeHandler} />
+      </div>
 
       {error && <p className="error">{error}</p>}
       {isLoading && <Loader />}
