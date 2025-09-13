@@ -3,6 +3,8 @@ import { QuestionCardList } from "../../components/QuestionCardList";
 import { API_URL } from "../../constants";
 import { Loader } from "../../components/Loader";
 
+import { useFetch } from "../../hooks/useFetch.ts";
+
 export interface ICards {
   id: string;
   question: string;
@@ -16,25 +18,23 @@ export interface ICards {
 
 export const HomePage = () => {
   const [questions, setQuestions] = useState<ICards[]>([]);
+  const [getQuestions, isLoading, error] = useFetch<string>(async (url) => {
+    const response = await fetch(`${API_URL}/${url}`);
+    const questions: ICards[] = await response.json();
 
-  const getQuestions = async () => {
-    try {
-      const response = await fetch(`${API_URL}/react`);
-      const questions: ICards[] = await response.json();
-      setQuestions(questions);
-      console.log(questions);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    setQuestions(questions);
+
+    return questions;
+  });
 
   useEffect(() => {
-    getQuestions();
+    getQuestions("react");
   }, []);
 
   return (
     <>
-      <Loader />
+      {error && <p className="error">{error}</p>}
+      {isLoading && <Loader />}
       <QuestionCardList cards={questions} />
     </>
   );
