@@ -8,3 +8,16 @@
     align-items: center;
     gap: .75em;
 }
+
+.noCardsInfo {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+
+
+@media (max-width: 768px) {
+    .controlsContainer {
+        flex-wrap: wrap;
+    }
+}
