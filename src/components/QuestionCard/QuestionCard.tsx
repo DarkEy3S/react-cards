@@ -1,11 +1,11 @@
 import cls from "./QuestionCard.module.css";
 import { Button } from "../Button";
 import { useNavigate } from "react-router-dom";
-import type { ICards } from "../../pages/HomePage";
+import type { ICard } from "../../pages/HomePage";
 import { Badge } from "../Badge";
 
 export interface QuestionCardProps {
-  card: ICards;
+  card: ICard;
 }
 
 export const QuestionCard = ({ card }: QuestionCardProps) => {

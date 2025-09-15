@@ -1,16 +1,16 @@
-import {} from "react";
+import type { MouseEvent, ReactNode } from "react";
 import cls from "./Button.module.css";
 
 interface Props {
-  children: React.ReactNode;
+  children: ReactNode;
   isActive?: boolean;
   isDisabled?: boolean;
-  onClick?: () => void;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 export const Button = ({ children, isActive, isDisabled, onClick }: Props) => {
-  const handleClick = () => {
-    if (onClick) onClick();
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+    if (onClick) onClick(e);
   };
 
   return (

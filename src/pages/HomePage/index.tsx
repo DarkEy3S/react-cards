@@ -1,2 +1,2 @@
 export { HomePage } from "./HomePage";
-export type { ICards } from "./HomePage";
+export type { ICard } from "./HomePage";
