@@ -1,0 +1,96 @@
+.container {
+    width: 100%;
+    min-height: 600px;
+    height: max-content;
+    margin: 50px auto;
+    border-radius: 0.75em;
+    padding: 1em;
+    background: var(--card-bg-color);
+    color: var(--text-color);
+    box-shadow: 0 0 8px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 2em;
+
+    button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        min-height: 400px;
+    }
+
+}
+
+.cardLabels {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap-reverse;
+    gap: .75em;
+    justify-content: flex-start;
+    align-items: center;
+
+}
+
+.editDate {
+    margin-left: auto;
+    font-size: 0.75em;
+    font-style: italic;
+}
+
+
+.cardTitle {
+    font-size: 1.5em;
+}
+
+.cardDescription {
+    font-size: 1.25em;
+
+}
+
+.cardAnswers {
+    margin-top: auto;
+    opacity: .65;
+}
+
+.cardAnswer {
+    font-size: .75em;
+    font-style: italic;
+    text-align: justify;
+}
+
+.cardLinks {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    align-items:flex-start;
+    gap: 0.5em;
+    li {
+        margin-left: 1em;
+    }
+
+}
+
+.cardCheckbox {
+    display: flex;
+    justify-content: center;
+
+    align-items:center;
+    gap: 0.5em;
+    span {
+        font-size: 1em;
+        padding-bottom: 0.25em;
+    }
+}
+
+.checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: #16c47f;
+}

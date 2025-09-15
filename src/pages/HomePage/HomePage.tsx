@@ -9,7 +9,7 @@ import { SearchInput } from "../../components/SearchInput";
 import { SelectInput } from "../../components/SelectInput";
 import { Pagination } from "../../components/Pagination";
 
-const DEFAULT_PER_PAGE = 20;
+const DEFAULT_PER_PAGE = 10;
 
 export interface ICard {
   id: string;

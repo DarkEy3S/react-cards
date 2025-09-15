@@ -11,10 +11,12 @@
     justify-content: flex-start;
     align-items: flex-start;
     gap: 1em;
+
     button {
         align-self: flex-end;
     }
 }
+
 @media (max-width: 768px) {
     .card {
         width: 100%;
@@ -23,10 +25,14 @@
 
 }
 
+
 .cardLabels {
     display: flex;
     gap: .75em;
+    justify-content: flex-start;
+    align-items: center;
 }
+
 
 .cardTitle {
     font-size: 1.5em;

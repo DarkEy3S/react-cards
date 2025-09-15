@@ -10,7 +10,7 @@
         "https://react.dev/reference/react"
       ],
       "level": 1,
-      "completed": true,
+      "completed": false,
       "editDate": "03.02.2025, 19:49"
     },
     {
@@ -46,7 +46,7 @@
         "https://react.dev/learn/your-first-component"
       ],
       "level": 1,
-      "completed": false,
+      "completed": true,
       "editDate": "21.02.2025, 20:26"
     },
     {
@@ -69,7 +69,7 @@
         "https://react.dev/learn/state-a-components-memory"
       ],
       "level": 2,
-      "completed": true
+      "completed": false
     },
     {
       "id": "7",
