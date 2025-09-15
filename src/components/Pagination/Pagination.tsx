@@ -16,11 +16,12 @@ export const Pagination = ({ pagination, onClick, questions }: PaginationProps) 
   };
   return (
     <div className={cls.paginationContainer}>
-      {pagination.map((value) => (
-        <Button key={value} onClick={onClick} isActive={value === getActivePageNumber(questions)}>
-          {value}
-        </Button>
-      ))}
+      {pagination.length > 1 &&
+        pagination.map((value) => (
+          <Button key={value} onClick={onClick} isActive={value === getActivePageNumber(questions)}>
+            {value}
+          </Button>
+        ))}
     </div>
   );
 };

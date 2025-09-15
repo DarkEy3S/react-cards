@@ -9,7 +9,7 @@ import { SearchInput } from "../../components/SearchInput";
 import { SelectInput } from "../../components/SelectInput";
 import { Pagination } from "../../components/Pagination";
 
-const DEFAULT_PER_PAGE = 10;
+const DEFAULT_PER_PAGE = 20;
 
 export interface ICard {
   id: string;
@@ -35,6 +35,7 @@ export const HomePage = () => {
 
   const [searchValue, setSearchValue] = useState("");
   const [sortSelectValue, setSortSelectValue] = useState("");
+  const [countSelectValue, setcountSelectValue] = useState("");
 
   const [getQuestions, isLoading, error] = useFetch<string, ICardsResponse>(async (url) => {
     const response = await fetch(`${API_URL}/${url}`);
@@ -51,12 +52,17 @@ export const HomePage = () => {
   const onSortSelectChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     setSortSelectValue(e.target.value);
 
-    setSearchParams(`?_page=1&_per_page=${DEFAULT_PER_PAGE}&${e.target.value}`);
+    setSearchParams(`?_page=1&_per_page=${countSelectValue}&${e.target.value}`);
+  };
+
+  const onCountSelectValueHandler = (e: ChangeEvent<HTMLSelectElement>) => {
+    setcountSelectValue(e.target.value);
+    setSearchParams(`?_page=1&_per_page=${e.target.value}&${sortSelectValue}`);
   };
 
   const paginationHandler = (e: MouseEvent<HTMLButtonElement>): void => {
     if (e.currentTarget.tagName === "BUTTON") {
-      setSearchParams(`?_page=${e.currentTarget.textContent}&_per_page=${DEFAULT_PER_PAGE}&${sortSelectValue}`);
+      setSearchParams(`?_page=${e.currentTarget.textContent}&_per_page=${countSelectValue}&${sortSelectValue}`);
       controlsContainerRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   };
@@ -72,7 +78,8 @@ export const HomePage = () => {
     return [];
   }, [questions, searchValue]);
 
-  const sort: string = useId();
+  const sortID: string = useId();
+  const countPageID: string = useId();
 
   const pagination: number[] = useMemo(() => {
     const totalCardsCount = questions?.pages || 0;
@@ -90,18 +97,34 @@ export const HomePage = () => {
       <div className={cls.controlsContainer} ref={controlsContainerRef}>
         <SearchInput placeholder="search..." value={searchValue} onChange={onSearchChangeHandler} />
         <SelectInput
-          id={sort}
-          name={"sortLevel"}
+          id={sortID}
+          name="sortLevel"
           value={sortSelectValue}
           onChange={onSortSelectChangeHandler}
-          childrenOptions={{
-            "": "sort by",
-            "_sort=level": "level ASC",
-            "_sort=-level": "level DESC",
-            "_sort=completed": "completed ASC",
-            "_sort=-completed": "completed DESC",
-          }}
-          title={"сортировка по уровню или по завершению "}
+          childrenOptions={[
+            { key: "", label: "sort by" },
+            { key: "_sort=level", label: "level ASC" },
+            { key: "_sort=-level", label: "level DESC" },
+            { key: "_sort=completed", label: "completed ASC" },
+            { key: "_sort=-completed", label: "completed DESC" },
+          ]}
+          title="сортировка по уровню или по завершению"
+        />
+
+        <SelectInput
+          id={countPageID}
+          name="countPage"
+          value={countSelectValue}
+          onChange={onCountSelectValueHandler}
+          childrenOptions={[
+            { key: "disabled", label: "count", disabled: true },
+            { key: "10", label: "10" },
+            { key: "20", label: "20" },
+            { key: "30", label: "30" },
+            { key: "50", label: "50" },
+            { key: "100", label: "100" },
+          ]}
+          title="показать количество карточек на странице"
         />
       </div>
 
