@@ -8,13 +8,13 @@ interface Option {
 }
 
 interface Props {
-  value?: string;
+  value?: string | number;
   onChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
   id?: string;
   name?: string;
   childrenOptions: Option[];
   title?: string;
-  defaultValue?: string;
+  defaultValue?: string | number;
 }
 
 export const SelectInput = ({ childrenOptions, name, id, value, onChange, title }: Props) => {
