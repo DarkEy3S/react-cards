@@ -1,0 +1,82 @@
+.formTitle {
+    margin: 2.5em auto;
+    width: fit-content;
+}
+
+.formContainer {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: var(--card-bg-color);
+    box-shadow: 0 0 8px 5px rgba(0, 0, 0, 0.1);
+
+}
+
+@media (max-width: 768px) {
+    .formContainer {
+        max-width: 400px;
+    }
+
+}
+
+
+
+/* form component */
+
+.form {
+    width: 100%;
+    padding: 1.25em .75em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 1em;
+}
+
+.formControl {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: .5em;
+    label {
+        color: var(--text-color);
+        font-size: 1.25em;
+    }
+    select, textarea {
+        padding: .5em;
+        color: var(--text-color);
+        background-color: var(--main-bg-color);
+        font-size: 1em;
+        border: 5px;
+        border: none;
+        outline: none;
+    }
+    select:focus-visible, textarea:focus-visible {
+        outline: 2px solid var(--green-color);
+    }
+}
+
+.clearFormControl {
+    display: flex;
+    justify-content: flex-start;
+
+    align-items:center;
+    gap: 0.5em;
+    span {
+        font-size: 1em;
+        padding-bottom: 0.25em;
+    }
+}
+
+.checkbox {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--green-color);
+}
+
+.checkbox:disabled + span {
+    opacity: .5;
+}

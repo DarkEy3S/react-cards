@@ -21,8 +21,7 @@
 
 @media (max-width: 768px) {
     .container {
-        width: 100%;
-        min-height: 400px;
+        max-width: 400px;
     }
 
 }
@@ -92,5 +91,5 @@
 .checkbox {
     width: 18px;
     height: 18px;
-    accent-color: #16c47f;
+    accent-color: var(--green-color);
 }
