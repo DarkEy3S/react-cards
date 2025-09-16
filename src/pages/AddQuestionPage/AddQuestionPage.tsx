@@ -5,6 +5,7 @@ import { useActionState } from "react";
 import { delayFn } from "../../helpers/delayFn.ts";
 import { toast } from "react-toastify";
 import { API_URL } from "../../constants";
+import { Loader } from "../../components/Loader";
 
 interface FormState {
   question?: string;
@@ -47,7 +48,7 @@ const createCardAction = async (_prevState: FormState, formData: FormData): Prom
     return isClearForm ? { clearForm: true } : { ...question, clearForm: isClearForm };
   } catch (error) {
     toast.error(String(error));
-    return {};
+    return { clearForm: true };
   }
 };
 
@@ -56,6 +57,7 @@ export const AddQuestionPage = () => {
 
   return (
     <>
+      {isPending && <Loader />}
       <h1 className={cls.formTitle}>Add new question</h1>
 
       <div className={cls.formContainer}>
