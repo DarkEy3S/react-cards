@@ -2,14 +2,16 @@ import cls from "./QuestionForm.module.css";
 import { Button } from "../Button";
 import { SelectInput } from "../SelectInput";
 import type { FC } from "react";
+import { useEffect, useState } from "react";
 
 interface QuestionFormState {
   question?: string | undefined;
   answer?: string | undefined;
   description?: string | undefined;
-  resources?: string | undefined;
+  resources?: string | string[] | undefined;
   level?: string | number | undefined;
   clearForm: boolean;
+  id?: number;
 }
 
 interface QuestionFormProps {
@@ -20,8 +22,18 @@ interface QuestionFormProps {
 }
 
 export const QuestionForm: FC<QuestionFormProps> = ({ formAction, state, isPending, submitBtnText }) => {
+  // локальный контролируемый стейт для select
+  const [level, setLevel] = useState<string>(state.level != null ? String(state.level) : "");
+
+  // синхронизация после сабмита/обновления formState
+  useEffect(() => {
+    setLevel(state.level != null ? String(state.level) : "");
+  }, [state.level]);
+
   return (
     <form action={formAction} className={cls.form}>
+      <input type="hidden" name="questionID" defaultValue={state.id} hidden />
+
       <div className={cls.formControl}>
         <label htmlFor="questionField">Question:</label>
         <textarea
@@ -74,9 +86,11 @@ export const QuestionForm: FC<QuestionFormProps> = ({ formAction, state, isPendi
         <SelectInput
           id="levelField"
           name="level"
-          defaultValue={state.level}
+          value={level}
+          onChange={(e) => setLevel(e.target.value)}
           childrenOptions={[
-            { key: "", label: "Question level", disabled: true },
+            { key: "__placeholder__", label: "Question level", disabled: true },
+            { key: "__sep1__", label: "", disabled: false, hr: true },
             { key: "1", label: "1 - easiest" },
             { key: "2", label: "2 - medium" },
             { key: "3", label: "3 - hardest" },

@@ -5,6 +5,7 @@ interface Option {
   key: string;
   label: string;
   disabled?: boolean;
+  hr?: boolean;
 }
 
 interface Props {
@@ -14,7 +15,7 @@ interface Props {
   name?: string;
   childrenOptions: Option[];
   title?: string;
-  defaultValue?: string | number | undefined;
+  defaultValue?: string;
 }
 
 export const SelectInput = ({ childrenOptions, name, id, value, onChange, title, defaultValue }: Props) => {
@@ -28,11 +29,16 @@ export const SelectInput = ({ childrenOptions, name, id, value, onChange, title,
       title={title}
       defaultValue={defaultValue}
     >
-      {childrenOptions.map(({ key, label, disabled }) => (
-        <option key={key} value={key} disabled={disabled}>
-          {label}
-        </option>
-      ))}
+      {childrenOptions.map(({ key, label, disabled, hr }) => {
+        if (hr) {
+          return <hr key={`${key}_line`} />;
+        }
+        return (
+          <option key={key} value={key} disabled={disabled}>
+            {label}
+          </option>
+        );
+      })}
     </select>
   );
 };

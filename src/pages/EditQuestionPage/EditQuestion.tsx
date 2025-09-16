@@ -1,32 +1,36 @@
-import cls from "./AddQuestionPage.module.css";
-
-import { useActionState } from "react";
-import { delayFn } from "../../helpers/delayFn.ts";
-import { toast } from "react-toastify";
-import { API_URL } from "../../constants";
+import cls from "./EditQuestionPage.module.css";
 import { Loader } from "../../components/Loader";
 import { QuestionForm } from "../../components/QuestionForm";
+import { useActionState } from "react";
+import { delayFn } from "../../helpers/delayFn.ts";
+import { API_URL } from "../../constants";
+import { toast } from "react-toastify";
 import { handleError } from "../../helpers/error.ts";
+import { dateFormat } from "../../helpers/dateFormat.ts";
 
 interface FormState {
   question?: string;
   answer?: string;
   description?: string;
-  resources?: string;
+  resources?: string | string[];
   level?: number | string;
   clearForm: boolean;
 }
 
-const createCardAction = async (_prevState: FormState, formData: FormData): Promise<FormState> => {
+type EditQuestionProps = {
+  initialState: Partial<FormState>;
+};
+
+const editCardAction = async (_prevState: FormState, formData: FormData): Promise<FormState> => {
   try {
     await delayFn();
 
     const newQuestion = Object.fromEntries(formData) as Record<string, string>;
     const resources = newQuestion.resources?.trim?.() ?? "";
     const isClearForm = Boolean(newQuestion.clearForm);
-
-    const response = await fetch(`${API_URL}/react`, {
-      method: "POST",
+    const questionID = newQuestion.questionID;
+    const response = await fetch(`${API_URL}/react/${questionID}`, {
+      method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         question: newQuestion.question,
@@ -35,7 +39,7 @@ const createCardAction = async (_prevState: FormState, formData: FormData): Prom
         resources: resources.length ? resources.split(",") : [],
         level: Number(newQuestion.level),
         completed: false,
-        editDate: undefined,
+        editDate: dateFormat(new Date()),
       }),
     });
 
@@ -44,7 +48,7 @@ const createCardAction = async (_prevState: FormState, formData: FormData): Prom
     }
 
     const question = await response.json();
-    toast.success("New question is successfully created");
+    toast.success("New question is edited successfully!");
 
     return isClearForm ? { clearForm: true } : { ...question, clearForm: isClearForm };
   } catch (error) {
@@ -53,18 +57,16 @@ const createCardAction = async (_prevState: FormState, formData: FormData): Prom
   }
 };
 
-export const AddQuestionPage = () => {
-  const [formState, formAction, isPending] = useActionState<FormState, FormData>(createCardAction, { clearForm: true });
+export const EditQuestion = ({ initialState }: EditQuestionProps) => {
+  const [formState, formAction, isPending] = useActionState(editCardAction, { ...initialState, clearForm: false });
 
   return (
     <>
       {isPending && <Loader />}
       <h1 className={cls.formTitle}>Add new question</h1>
       <div className={cls.formContainer}>
-        <QuestionForm state={formState} formAction={formAction} submitBtnText={"Add Question"} isPending={isPending} />
+        <QuestionForm state={formState} formAction={formAction} submitBtnText={"Edit Question"} isPending={isPending} />
       </div>
     </>
   );
 };
-
-export default AddQuestionPage;

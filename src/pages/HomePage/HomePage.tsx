@@ -103,6 +103,8 @@ export const HomePage = () => {
           onChange={onSortSelectChangeHandler}
           childrenOptions={[
             { key: "", label: "sort by" },
+            { key: "", label: "", disabled: false, hr: true },
+
             { key: "_sort=level", label: "level ASC" },
             { key: "_sort=-level", label: "level DESC" },
             { key: "_sort=completed", label: "completed ASC" },
@@ -118,6 +120,8 @@ export const HomePage = () => {
           onChange={onCountSelectValueHandler}
           childrenOptions={[
             { key: "disabled", label: "count", disabled: true },
+            { key: "", label: "", disabled: false, hr: true },
+
             { key: "10", label: "10" },
             { key: "20", label: "20" },
             { key: "30", label: "30" },

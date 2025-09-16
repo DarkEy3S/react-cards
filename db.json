@@ -9,7 +9,7 @@
         "https://react.dev",
         "https://react.dev/reference/react"
       ],
-      "level": 1,
+      "level": 3,
       "completed": false,
       "editDate": "03.02.2025, 19:49"
     },
@@ -564,6 +564,19 @@
       "resources": [],
       "level": 1,
       "completed": false
+    },
+    {
+      "id": "04e8",
+      "question": "test 4",
+      "answer": "test fdsa f",
+      "description": "test sadf ",
+      "resources": [
+        "https://react.dev",
+        "https://react.dev/reference/react"
+      ],
+      "level": 3,
+      "completed": true,
+      "editDate": "9/16/2025, 05:52 PM"
     }
   ]
 }
