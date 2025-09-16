@@ -18,6 +18,7 @@ export default defineConfig([
     rules: {
       // отключаем старое правило для React 17+
       "react/react-in-jsx-scope": "off",
+      "no-console": "error",
       "prettier/prettier": [
         "error",
         {
