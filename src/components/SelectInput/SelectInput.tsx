@@ -8,18 +8,26 @@ interface Option {
 }
 
 interface Props {
-  value?: string | number;
+  value?: string;
   onChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
   id?: string;
   name?: string;
   childrenOptions: Option[];
   title?: string;
-  defaultValue?: string | number;
+  defaultValue?: string | number | undefined;
 }
 
-export const SelectInput = ({ childrenOptions, name, id, value, onChange, title }: Props) => {
+export const SelectInput = ({ childrenOptions, name, id, value, onChange, title, defaultValue }: Props) => {
   return (
-    <select value={value} onChange={onChange} className={cls.select} name={name} id={id} title={title} defaultValue={value}>
+    <select
+      value={value}
+      onChange={onChange}
+      className={cls.select}
+      name={name}
+      id={id}
+      title={title}
+      defaultValue={defaultValue}
+    >
       {childrenOptions.map(({ key, label, disabled }) => (
         <option key={key} value={key} disabled={disabled}>
           {label}

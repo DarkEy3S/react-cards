@@ -564,15 +564,6 @@
       "resources": [],
       "level": 1,
       "completed": false
-    },
-    {
-      "id": "8dd6",
-      "question": "test",
-      "answer": "test",
-      "description": "test",
-      "resources": [],
-      "level": 1,
-      "completed": false
     }
   ]
 }
