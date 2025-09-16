@@ -15,6 +15,7 @@ export const EditQuestionPage = () => {
 
     setQuestion(data);
   });
+
   useEffect(() => {
     fetchQuestion();
   }, []);

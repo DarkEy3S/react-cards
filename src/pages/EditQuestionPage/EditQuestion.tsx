@@ -7,6 +7,8 @@ import { API_URL } from "../../constants";
 import { toast } from "react-toastify";
 import { handleError } from "../../helpers/error.ts";
 import { dateFormat } from "../../helpers/dateFormat.ts";
+import { useNavigate } from "react-router-dom";
+import { useFetch } from "../../hooks/useFetch.ts";
 
 interface FormState {
   question?: string;
@@ -15,6 +17,7 @@ interface FormState {
   resources?: string | string[];
   level?: number | string;
   clearForm: boolean;
+  id?: number | undefined;
 }
 
 type EditQuestionProps = {
@@ -58,14 +61,38 @@ const editCardAction = async (_prevState: FormState, formData: FormData): Promis
 };
 
 export const EditQuestion = ({ initialState }: EditQuestionProps) => {
+  const navigate = useNavigate();
   const [formState, formAction, isPending] = useActionState(editCardAction, { ...initialState, clearForm: false });
+
+  const [removeQuestion, isQuestionRemoving] = useFetch(async () => {
+    await fetch(`${API_URL}/react/${initialState.id}`, {
+      method: "DELETE",
+    });
+
+    toast.success("The question has been removed!");
+    navigate("/");
+  });
+
+  const onRemoveQuestionHandler = () => {
+    const isRemove = confirm("Are you sure you want to remove this question?");
+
+    if (isRemove) removeQuestion();
+  };
 
   return (
     <>
-      {isPending && <Loader />}
+      {isPending && isQuestionRemoving && <Loader />}
       <h1 className={cls.formTitle}>Add new question</h1>
       <div className={cls.formContainer}>
-        <QuestionForm state={formState} formAction={formAction} submitBtnText={"Edit Question"} isPending={isPending} />
+        <button className={cls.removeBtn} disabled={isPending && isQuestionRemoving} onClick={onRemoveQuestionHandler}>
+          X
+        </button>
+        <QuestionForm
+          state={formState}
+          formAction={formAction}
+          submitBtnText={"Edit Question"}
+          isPending={isPending && isQuestionRemoving}
+        />
       </div>
     </>
   );

@@ -21,3 +21,24 @@
 }
 
 
+.removeBtn {
+    width: 2em;
+    height: 2em;
+    position: absolute;
+    top: .5em;
+    right: .75em;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ebedf0;
+    background-color: #d84848;
+    cursor: pointer;
+
+}
+
+.removeBtn:disabled {
+    opacity: .3;
+}
+
