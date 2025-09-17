@@ -1,17 +1,19 @@
 import cls from "./ThemeToggler.module.css";
 import { useTheme } from "../hooks/useTheme.ts";
 import { THEME_STORAGE } from "../constants";
-import type { Theme } from "../theme/themeProvider.tsx";
+import type { Theme } from "../theme/ThemeProvider.tsx";
 import type { ChangeEvent } from "react";
 
 export const ThemeToggler = () => {
   const { theme, setTheme } = useTheme();
 
   const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-    const updatedTheme: Theme = e.target.checked ? "dark" : "light";
+    const isChecked = e.target.checked;
+    const updatedTheme: Theme = isChecked ? "dark" : "light";
 
     setTheme(updatedTheme);
     localStorage.setItem(THEME_STORAGE, updatedTheme);
+    document.body.classList.toggle("darkLayout", isChecked);
   };
 
   return (
