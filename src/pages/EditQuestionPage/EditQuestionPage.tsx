@@ -5,7 +5,7 @@ import { Loader } from "../../components/Loader";
 import { API_URL } from "../../constants";
 import { EditQuestion } from "./EditQuestion.tsx";
 
-export const EditQuestionPage = () => {
+const EditQuestionPage = () => {
   const { id } = useParams();
   const [question, setQuestion] = useState(null);
 
@@ -27,3 +27,5 @@ export const EditQuestionPage = () => {
     </div>
   );
 };
+
+export default EditQuestionPage;
