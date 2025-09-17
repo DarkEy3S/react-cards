@@ -7,6 +7,7 @@ import { useFetch } from "../../hooks/useFetch.ts";
 import { API_URL } from "../../constants";
 import type { ICard } from "../HomePage";
 import { Loader, SmallLoader } from "../../components/Loader";
+import { useAuth } from "../../hooks/useAuth.ts";
 
 export const QuestionPage = () => {
   const [isChecked, setChecked] = useState<boolean>(true);
@@ -14,6 +15,7 @@ export const QuestionPage = () => {
   const navigate = useNavigate();
   const { id } = useParams<{ id: string }>();
   const checkboxID = useId();
+  const { isAuth } = useAuth();
 
   const levelOption = (): "primary" | "warning" | "alert" => {
     if (!card) return "primary";
@@ -105,9 +107,11 @@ export const QuestionPage = () => {
             {isCardUpdating && <SmallLoader />}
           </label>
 
-          <Button isDisabled={isCardUpdating} onClick={() => navigate(`/editquestion/${card.id}`)}>
-            Edit Question
-          </Button>
+          {isAuth && (
+            <Button isDisabled={isCardUpdating} onClick={() => navigate(`/editquestion/${card.id}`)}>
+              Edit Question
+            </Button>
+          )}
           <Button isDisabled={isCardUpdating} onClick={() => navigate(`/`)}>
             Back
           </Button>
