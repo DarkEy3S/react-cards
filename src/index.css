@@ -20,6 +20,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
 @media (max-width: 768px) {
     :root {
         font-size: 12px;
@@ -50,6 +51,17 @@ body {
     border-radius: .5em;
     border: 1px solid #57c4dc;
     overflow: hidden;
+}
+
+.darkLayout {
+    --main-bg-color: #23272f;
+    --text-color: #e0e0e0;
+
+    --card-bg-color: #343a46;
+
+    --btn-text-color: #16444f;
+    --btn-bg-color: #57c4dc;
+    --green-color: #219679;
 }
 
 @media (prefers-color-scheme: light) {
