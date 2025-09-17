@@ -44,15 +44,6 @@ body {
     background-color: var(--main-bg-color);
 }
 
-.error {
-    font-size: 2em;
-    color: #57c4dc;
-    background-color: #16444f;
-    padding: 1em .75em;
-    border-radius: .5em;
-    border: 1px solid #57c4dc;
-    overflow: hidden;
-}
 
 .darkLayout {
     --main-bg-color: #23272f;

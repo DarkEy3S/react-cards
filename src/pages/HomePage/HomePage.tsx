@@ -37,7 +37,7 @@ export const HomePage = () => {
   const [sortSelectValue, setSortSelectValue] = useState("");
   const [countSelectValue, setcountSelectValue] = useState("");
 
-  const [getQuestions, isLoading, error] = useFetch<string, ICardsResponse>(async (url) => {
+  const [getQuestions, isLoading] = useFetch<string, ICardsResponse>(async (url) => {
     const response = await fetch(`${API_URL}/${url}`);
     const questions: ICardsResponse = await response.json();
     setQuestions(questions);
@@ -132,7 +132,6 @@ export const HomePage = () => {
         />
       </div>
 
-      {error && <p className="error">{error}</p>}
       {isLoading && <Loader />}
 
       <QuestionCardList cards={cards} />
